@@ -6,15 +6,21 @@ import Loading from '../components/common/Loading';
 import Card from '../components/common/Card';
 import Button from '../components/common/Button';
 
+/**
+ * Pagina Recensioni Utente
+ * Mostra tutte le recensioni scritte dall'utente autenticato
+ */
 const ReviewsPage = () => {
   const dispatch = useDispatch();
   const reviews = useSelector(selectUserReviews);
   const loading = useSelector(selectReviewsLoading);
 
+  // Carica le recensioni dell'utente al montaggio del componente
   useEffect(() => {
     dispatch(fetchUserReviews({}));
   }, [dispatch]);
 
+  // Gestisce l'eliminazione di una recensione
   const handleDelete = (reviewId) => {
     if (confirm('Are you sure you want to delete this review?')) {
       dispatch(deleteReview(reviewId));
@@ -30,11 +36,13 @@ const ReviewsPage = () => {
     <div className="container-custom py-8">
       <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white">My Reviews</h1>
 
+      {/* Lista vuota */}
       {reviews.length === 0 ? (
         <div className="text-center py-12">
           <p className="text-gray-600 dark:text-gray-400">No reviews yet</p>
         </div>
       ) : (
+        /* Lista recensioni */
         <div className="space-y-4">
           {reviews.map((review) => (
             <Card key={review.id}>

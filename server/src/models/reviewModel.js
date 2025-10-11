@@ -1,19 +1,19 @@
 /**
- * Review Model
- * Database queries for review operations using raw SQL
+ * Model Recensioni
+ * Query al database per le operazioni sulle recensioni usando SQL puro
  */
 
 const { query } = require('../config/database');
 const { DatabaseError } = require('../utils/errors/AppError');
 
 /**
- * Create a new review
- * @param {number} userId - User's ID
- * @param {number} movieId - Movie's ID from TMDB
- * @param {string} movieTitle - Movie title
- * @param {number} rating - Rating (1-5)
- * @param {string} comment - Review comment
- * @returns {Promise<Object>} - Created review object
+ * Crea una nuova recensione
+ * @param {number} userId - ID dell'utente
+ * @param {number} movieId - ID TMDB del film
+ * @param {string} movieTitle - Titolo del film
+ * @param {number} rating - Valutazione (1-5)
+ * @param {string} comment - Commento della recensione
+ * @returns {Promise<Object>} - Oggetto recensione creato
  */
 const createReview = async (userId, movieId, movieTitle, rating, comment) => {
   try {
@@ -32,11 +32,11 @@ const createReview = async (userId, movieId, movieTitle, rating, comment) => {
 
     return result.rows[0];
   } catch (error) {
-    // Handle unique constraint violation (already reviewed)
+    // Gestisci violazione di vincolo unique (già recensito)
     if (error.code === '23505') {
       throw new Error('You have already reviewed this movie');
     }
-    // Handle check constraint violation (invalid rating)
+    // Gestisci violazione di vincolo check (valutazione non valida)
     if (error.code === '23514') {
       throw new Error('Rating must be between 1 and 5');
     }
@@ -45,11 +45,11 @@ const createReview = async (userId, movieId, movieTitle, rating, comment) => {
 };
 
 /**
- * Update a review
- * @param {number} reviewId - Review's ID
- * @param {number} rating - New rating
- * @param {string} comment - New comment
- * @returns {Promise<Object>} - Updated review object
+ * Aggiorna una recensione
+ * @param {number} reviewId - ID della recensione
+ * @param {number} rating - Nuova valutazione
+ * @param {string} comment - Nuovo commento
+ * @returns {Promise<Object>} - Oggetto recensione aggiornato
  */
 const updateReview = async (reviewId, rating, comment) => {
   try {
@@ -76,9 +76,9 @@ const updateReview = async (reviewId, rating, comment) => {
 };
 
 /**
- * Delete a review
- * @param {number} reviewId - Review's ID
- * @returns {Promise<boolean>} - True if deleted
+ * Elimina una recensione
+ * @param {number} reviewId - ID della recensione
+ * @returns {Promise<boolean>} - True se eliminata
  */
 const deleteReview = async (reviewId) => {
   try {
@@ -97,10 +97,10 @@ const deleteReview = async (reviewId) => {
 };
 
 /**
- * Get all reviews by user ID
- * @param {number} userId - User's ID
- * @param {Object} options - Pagination options
- * @returns {Promise<Array>} - Array of reviews
+ * Ottiene tutte le recensioni per ID utente
+ * @param {number} userId - ID dell'utente
+ * @param {Object} options - Opzioni di query (limit, offset, sortBy, sortOrder)
+ * @returns {Promise<Array>} - Array di oggetti recensione
  */
 const getReviewsByUserId = async (userId, options = {}) => {
   try {
@@ -131,10 +131,10 @@ const getReviewsByUserId = async (userId, options = {}) => {
 };
 
 /**
- * Get all reviews for a movie
- * @param {number} movieId - Movie's ID from TMDB
- * @param {Object} options - Pagination options
- * @returns {Promise<Array>} - Array of reviews with user info
+ * Ottiene tutte le recensioni per un film
+ * @param {number} movieId - ID TMDB del film
+ * @param {Object} options - Opzioni di query
+ * @returns {Promise<Array>} - Array di oggetti recensione con info utente
  */
 const getReviewsByMovieId = async (movieId, options = {}) => {
   try {
@@ -167,9 +167,9 @@ const getReviewsByMovieId = async (movieId, options = {}) => {
 };
 
 /**
- * Get review by ID
- * @param {number} reviewId - Review's ID
- * @returns {Promise<Object|null>} - Review object or null
+ * Ottiene una recensione per ID
+ * @param {number} reviewId - ID della recensione
+ * @returns {Promise<Object|null>} - Oggetto recensione o null
  */
 const getReviewById = async (reviewId) => {
   try {
@@ -212,9 +212,9 @@ const getReviewByUserAndMovie = async (userId, movieId) => {
 };
 
 /**
- * Get total count of reviews by user
- * @param {number} userId - User's ID
- * @returns {Promise<number>} - Total count
+ * Ottiene il conteggio totale delle recensioni di un utente
+ * @param {number} userId - ID dell'utente
+ * @returns {Promise<number>} - Conteggio totale
  */
 const getReviewsCountByUser = async (userId) => {
   try {
@@ -233,9 +233,9 @@ const getReviewsCountByUser = async (userId) => {
 };
 
 /**
- * Get total count of reviews for a movie
- * @param {number} movieId - Movie's ID
- * @returns {Promise<number>} - Total count
+ * Ottiene il conteggio totale delle recensioni per un film
+ * @param {number} movieId - ID del film
+ * @returns {Promise<number>} - Conteggio totale
  */
 const getReviewsCountByMovie = async (movieId) => {
   try {
@@ -254,9 +254,9 @@ const getReviewsCountByMovie = async (movieId) => {
 };
 
 /**
- * Get average rating for a movie
- * @param {number} movieId - Movie's ID
- * @returns {Promise<number>} - Average rating
+ * Ottiene la valutazione media per un film
+ * @param {number} movieId - ID del film
+ * @returns {Promise<number>} - Valutazione media
  */
 const getAverageRatingByMovie = async (movieId) => {
   try {

@@ -1,13 +1,13 @@
 /**
- * TMDB API Service
- * Handles all interactions with The Movie Database API
+ * Servizio API TMDB
+ * Gestisce tutte le interazioni con l'API The Movie Database
  */
 
 const axios = require('axios');
 const config = require('../config/config');
 const { ExternalAPIError } = require('../utils/errors/AppError');
 
-// Create axios instance for TMDB
+// Crea un'istanza axios per TMDB
 const tmdbApi = axios.create({
   baseURL: config.tmdb.baseUrl,
   timeout: 10000,
@@ -17,9 +17,9 @@ const tmdbApi = axios.create({
 });
 
 /**
- * Get popular movies
- * @param {number} page - Page number
- * @returns {Promise<Object>} - TMDB response with movies
+ * Ottiene i film popolari
+ * @param {number} page - Numero di pagina
+ * @returns {Promise<Object>} - Risposta TMDB con i film
  */
 const getPopularMovies = async (page = 1) => {
   try {
@@ -37,10 +37,10 @@ const getPopularMovies = async (page = 1) => {
 };
 
 /**
- * Search movies by query
- * @param {string} query - Search query
- * @param {number} page - Page number
- * @returns {Promise<Object>} - TMDB response with search results
+ * Cerca film per query
+ * @param {string} query - Query di ricerca
+ * @param {number} page - Numero di pagina
+ * @returns {Promise<Object>} - Risposta TMDB con i risultati della ricerca
  */
 const searchMovies = async (query, page = 1) => {
   try {
@@ -87,9 +87,9 @@ const getMovieDetails = async (movieId) => {
 };
 
 /**
- * Get trending movies
- * @param {string} timeWindow - 'day' or 'week'
- * @returns {Promise<Object>} - TMDB response with trending movies
+ * Ottiene i film di tendenza
+ * @param {string} timeWindow - 'day' o 'week'
+ * @returns {Promise<Object>} - Risposta TMDB con i film di tendenza
  */
 const getTrendingMovies = async (timeWindow = 'week') => {
   try {
@@ -110,9 +110,9 @@ const getTrendingMovies = async (timeWindow = 'week') => {
 };
 
 /**
- * Get top rated movies
- * @param {number} page - Page number
- * @returns {Promise<Object>} - TMDB response with top rated movies
+ * Ottiene i film più votati
+ * @param {number} page - Numero di pagina
+ * @returns {Promise<Object>} - Risposta TMDB con i film più votati
  */
 const getTopRatedMovies = async (page = 1) => {
   try {

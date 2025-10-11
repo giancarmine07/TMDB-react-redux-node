@@ -1,17 +1,17 @@
 /**
- * User Model
- * Database queries for user operations using raw SQL
+ * Model Utente
+ * Query al database per le operazioni sugli utenti usando SQL puro
  */
 
 const { query } = require('../config/database');
 const { DatabaseError } = require('../utils/errors/AppError');
 
 /**
- * Create a new user
- * @param {string} username - User's username
- * @param {string} email - User's email
- * @param {string} passwordHash - Hashed password
- * @returns {Promise<Object>} - Created user object
+ * Crea un nuovo utente
+ * @param {string} username - Nome utente
+ * @param {string} email - Email dell'utente
+ * @param {string} passwordHash - Password hashata
+ * @returns {Promise<Object>} - Oggetto utente creato
  */
 const createUser = async (username, email, passwordHash) => {
   try {
@@ -29,7 +29,7 @@ const createUser = async (username, email, passwordHash) => {
 
     return result.rows[0];
   } catch (error) {
-    // Handle unique constraint violations
+    // Gestisci violazioni di vincoli unique
     if (error.code === '23505') {
       if (error.constraint === 'users_email_key') {
         throw new Error('Email already exists');
@@ -43,9 +43,9 @@ const createUser = async (username, email, passwordHash) => {
 };
 
 /**
- * Find user by email
- * @param {string} email - User's email
- * @returns {Promise<Object|null>} - User object or null
+ * Trova utente per email
+ * @param {string} email - Email dell'utente
+ * @returns {Promise<Object|null>} - Oggetto utente o null
  */
 const findUserByEmail = async (email) => {
   try {
@@ -64,9 +64,9 @@ const findUserByEmail = async (email) => {
 };
 
 /**
- * Find user by username
- * @param {string} username - User's username
- * @returns {Promise<Object|null>} - User object or null
+ * Trova utente per nome utente
+ * @param {string} username - Nome utente
+ * @returns {Promise<Object|null>} - Oggetto utente o null
  */
 const findUserByUsername = async (username) => {
   try {
@@ -85,9 +85,9 @@ const findUserByUsername = async (username) => {
 };
 
 /**
- * Find user by ID
- * @param {number} id - User's ID
- * @returns {Promise<Object|null>} - User object or null
+ * Trova utente per ID
+ * @param {number} userId - ID dell'utente
+ * @returns {Promise<Object|null>} - Oggetto utente o null
  */
 const findUserById = async (id) => {
   try {
@@ -106,10 +106,10 @@ const findUserById = async (id) => {
 };
 
 /**
- * Update user information
- * @param {number} id - User's ID
- * @param {Object} updates - Fields to update
- * @returns {Promise<Object>} - Updated user object
+ * Aggiorna utente
+ * @param {number} userId - ID dell'utente
+ * @param {Object} updates - Campi da aggiornare
+ * @returns {Promise<Object>} - Oggetto utente aggiornato
  */
 const updateUser = async (id, updates) => {
   try {
@@ -122,7 +122,7 @@ const updateUser = async (id, updates) => {
       throw new Error('No valid fields to update');
     }
 
-    // Build dynamic SET clause
+    // Costruisci la clausola SET dinamica
     const setClause = fields
       .map((field, index) => `${field} = $${index + 2}`)
       .join(', ');
@@ -157,9 +157,9 @@ const updateUser = async (id, updates) => {
 };
 
 /**
- * Delete user by ID
- * @param {number} id - User's ID
- * @returns {Promise<boolean>} - True if deleted
+ * Elimina utente
+ * @param {number} userId - ID dell'utente
+ * @returns {Promise<boolean>} - True se eliminato
  */
 const deleteUser = async (id) => {
   try {

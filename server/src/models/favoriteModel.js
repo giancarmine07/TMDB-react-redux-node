@@ -1,16 +1,16 @@
 /**
- * Favorite Model
- * Database queries for favorite operations using raw SQL
+ * Model Preferiti
+ * Query al database per le operazioni sui preferiti usando SQL puro
  */
 
 const { query } = require('../config/database');
 const { DatabaseError } = require('../utils/errors/AppError');
 
 /**
- * Add a movie to user's favorites
- * @param {number} userId - User's ID
- * @param {Object} movieData - Movie information from TMDB
- * @returns {Promise<Object>} - Created favorite object
+ * Aggiunge un film ai preferiti dell'utente
+ * @param {number} userId - ID dell'utente
+ * @param {Object} movieData - Informazioni del film da TMDB
+ * @returns {Promise<Object>} - Oggetto preferito creato
  */
 const addFavorite = async (userId, movieData) => {
   try {
@@ -46,7 +46,7 @@ const addFavorite = async (userId, movieData) => {
 
     return result.rows[0];
   } catch (error) {
-    // Handle unique constraint violation (already favorited)
+    // Gestisci violazione di vincolo unique (già nei preferiti)
     if (error.code === '23505') {
       throw new Error('Movie already in favorites');
     }
@@ -55,10 +55,10 @@ const addFavorite = async (userId, movieData) => {
 };
 
 /**
- * Remove a movie from user's favorites
- * @param {number} userId - User's ID
- * @param {number} movieId - Movie's ID from TMDB
- * @returns {Promise<boolean>} - True if removed
+ * Rimuove un film dai preferiti dell'utente
+ * @param {number} userId - ID dell'utente
+ * @param {number} movieId - ID TMDB del film
+ * @returns {Promise<boolean>} - True se eliminato
  */
 const removeFavorite = async (userId, movieId) => {
   try {
@@ -77,10 +77,10 @@ const removeFavorite = async (userId, movieId) => {
 };
 
 /**
- * Get all favorites for a user
- * @param {number} userId - User's ID
- * @param {Object} options - Pagination options
- * @returns {Promise<Array>} - Array of favorite movies
+ * Ottiene tutti i preferiti di un utente
+ * @param {number} userId - ID dell'utente
+ * @param {Object} options - Opzioni di query (limit, offset, sortBy, sortOrder)
+ * @returns {Promise<Array>} - Array di oggetti preferiti
  */
 const getFavoritesByUserId = async (userId, options = {}) => {
   try {
@@ -155,9 +155,9 @@ const getFavoriteById = async (id) => {
 };
 
 /**
- * Get total count of user's favorites
- * @param {number} userId - User's ID
- * @returns {Promise<number>} - Total count
+ * Ottiene il conteggio totale dei preferiti di un utente
+ * @param {number} userId - ID dell'utente
+ * @returns {Promise<number>} - Conteggio totale
  */
 const getFavoritesCount = async (userId) => {
   try {
@@ -176,10 +176,10 @@ const getFavoritesCount = async (userId) => {
 };
 
 /**
- * Get favorite by user ID and movie ID
- * @param {number} userId - User's ID
- * @param {number} movieId - Movie's ID
- * @returns {Promise<Object|null>} - Favorite object or null
+ * Ottiene un preferito specifico per utente e ID film
+ * @param {number} userId - ID dell'utente
+ * @param {number} movieId - ID TMDB del film
+ * @returns {Promise<Object|null>} - Oggetto preferito o null
  */
 const getFavoriteByUserAndMovie = async (userId, movieId) => {
   try {

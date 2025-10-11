@@ -1,6 +1,6 @@
 /**
- * Auth Service
- * Business logic for authentication operations
+ * Servizio Autenticazione
+ * Logica di business per le operazioni di autenticazione
  */
 
 const bcrypt = require('bcrypt');
@@ -9,9 +9,9 @@ const { ValidationError } = require('../utils/errors/AppError');
 const SALT_ROUNDS = 10;
 
 /**
- * Hash password using bcrypt
- * @param {string} password - Plain text password
- * @returns {Promise<string>} - Hashed password
+ * Hash della password usando bcrypt
+ * @param {string} password - Password in chiaro
+ * @returns {Promise<string>} - Password hashata
  */
 const hashPassword = async (password) => {
   try {
@@ -23,10 +23,10 @@ const hashPassword = async (password) => {
 };
 
 /**
- * Compare password with hash
- * @param {string} password - Plain text password
- * @param {string} hash - Hashed password
- * @returns {Promise<boolean>} - True if password matches
+ * Confronta la password con l'hash
+ * @param {string} password - Password in chiaro
+ * @param {string} hash - Password hashata
+ * @returns {Promise<boolean>} - True se la password corrisponde
  */
 const comparePassword = async (password, hash) => {
   try {
@@ -38,9 +38,9 @@ const comparePassword = async (password, hash) => {
 };
 
 /**
- * Validate username
- * @param {string} username - Username to validate
- * @returns {Object} - Validation result
+ * Valida il nome utente
+ * @param {string} username - Nome utente da validare
+ * @returns {Object} - Risultato della validazione
  */
 const validateUsername = (username) => {
   const errors = [];
@@ -68,9 +68,9 @@ const validateUsername = (username) => {
 };
 
 /**
- * Validate email
- * @param {string} email - Email to validate
- * @returns {Object} - Validation result
+ * Valida l'email
+ * @param {string} email - Email da validare
+ * @returns {Object} - Risultato della validazione
  */
 const validateEmail = (email) => {
   const errors = [];
@@ -95,9 +95,9 @@ const validateEmail = (email) => {
 };
 
 /**
- * Validate password
- * @param {string} password - Password to validate
- * @returns {Object} - Validation result
+ * Valida la password
+ * @param {string} password - Password da validare
+ * @returns {Object} - Risultato della validazione
  */
 const validatePassword = (password) => {
   const errors = [];
@@ -121,11 +121,11 @@ const validatePassword = (password) => {
 };
 
 /**
- * Validate user registration data
- * @param {string} username - Username
+ * Valida i dati di registrazione dell'utente
+ * @param {string} username - Nome utente
  * @param {string} email - Email
  * @param {string} password - Password
- * @throws {ValidationError} - If validation fails
+ * @throws {ValidationError} - Se la validazione fallisce
  */
 const validateUserData = (username, email, password) => {
   const allErrors = [];
@@ -153,10 +153,10 @@ const validateUserData = (username, email, password) => {
 };
 
 /**
- * Validate login data
+ * Valida i dati di login
  * @param {string} email - Email
  * @param {string} password - Password
- * @throws {ValidationError} - If validation fails
+ * @throws {ValidationError} - Se la validazione fallisce
  */
 const validateLoginData = (email, password) => {
   const allErrors = [];

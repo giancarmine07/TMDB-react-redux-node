@@ -1,6 +1,6 @@
 /**
- * Movies Controller
- * Handles movie-related requests (proxy to TMDB API)
+ * Controller Film
+ * Gestisce le richieste relative ai film (proxy all'API TMDB)
  */
 
 const tmdbService = require('../services/tmdbService');
@@ -8,9 +8,9 @@ const { catchAsync } = require('../middleware/errorHandler');
 const { BadRequestError } = require('../utils/errors/AppError');
 
 /**
- * Get popular movies
+ * Ottiene i film popolari
  * @route GET /api/movies/popular
- * @access Public
+ * @access Pubblico
  */
 const getPopularMovies = catchAsync(async (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -33,9 +33,9 @@ const getPopularMovies = catchAsync(async (req, res) => {
 });
 
 /**
- * Search movies
+ * Cerca film
  * @route GET /api/movies/search
- * @access Public
+ * @access Pubblico
  */
 const searchMovies = catchAsync(async (req, res) => {
   const { query, page } = req.query;
@@ -65,9 +65,9 @@ const searchMovies = catchAsync(async (req, res) => {
 });
 
 /**
- * Get movie details
+ * Ottiene i dettagli del film
  * @route GET /api/movies/:id
- * @access Public
+ * @access Pubblico
  */
 const getMovieDetails = catchAsync(async (req, res) => {
   const movieId = parseInt(req.params.id);
@@ -85,9 +85,9 @@ const getMovieDetails = catchAsync(async (req, res) => {
 });
 
 /**
- * Get trending movies
+ * Ottiene i film di tendenza
  * @route GET /api/movies/trending
- * @access Public
+ * @access Pubblico
  */
 const getTrendingMovies = catchAsync(async (req, res) => {
   const timeWindow = req.query.timeWindow || 'week';
@@ -106,9 +106,9 @@ const getTrendingMovies = catchAsync(async (req, res) => {
 });
 
 /**
- * Get top rated movies
+ * Ottiene i film più votati
  * @route GET /api/movies/top-rated
- * @access Public
+ * @access Pubblico
  */
 const getTopRatedMovies = catchAsync(async (req, res) => {
   const page = parseInt(req.query.page) || 1;

@@ -28,6 +28,7 @@ import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 import { TMDB_IMAGE_BASE_URL, IMAGE_SIZES } from '../constants';
 
+// Componente card per visualizzare un singolo film
 const MovieCard = ({ movie, isFavorite, onFavoriteToggle, onClick }) => {
   const posterUrl = movie.poster_path
     ? `${TMDB_IMAGE_BASE_URL}${IMAGE_SIZES.POSTER.MEDIUM}${movie.poster_path}`
@@ -134,6 +135,7 @@ const HomePage = () => {
     setActiveTab('popular');
   };
 
+  // Naviga alla pagina di dettaglio del film
   const handleMovieClick = (movieId) => {
     navigate(`/movies/${movieId}`);
   };
