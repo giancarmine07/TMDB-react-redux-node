@@ -1,6 +1,6 @@
 /**
- * Axios API Service
- * Configured axios instance with interceptors for request/response handling
+ * Servizio API Axios
+ * Istanza axios configurata con interceptor per la gestione di richieste/risposte
  */
 
 import axios from 'axios';
@@ -8,31 +8,31 @@ import { API_BASE_URL, STORAGE_KEYS } from '../constants';
 import { parseError, isAuthError } from '../utils/errors/errorHandler';
 
 /**
- * Create axios instance with default configuration
+ * Crea un'istanza axios con configurazione predefinita
  */
 const api = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 15000, // 15 seconds
+  timeout: 15000, // 15 secondi
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
 /**
- * Request Interceptor
- * Adds authentication token to requests
+ * Interceptor Richieste
+ * Aggiunge il token di autenticazione alle richieste
  */
 api.interceptors.request.use(
   (config) => {
-    // Get token from localStorage
+    // Ottieni il token dal localStorage
     const token = localStorage.getItem(STORAGE_KEYS.TOKEN);
 
-    // Add token to headers if it exists
+    // Aggiungi il token agli header se esiste
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
 
-    // Log request in development
+    // Logga la richiesta in sviluppo
     if (import.meta.env.DEV) {
       console.log('🚀 API Request:', {
         method: config.method?.toUpperCase(),
@@ -51,12 +51,12 @@ api.interceptors.request.use(
 );
 
 /**
- * Response Interceptor
- * Handles responses and errors globally
+ * Interceptor Risposte
+ * Gestisce risposte ed errori globalmente
  */
 api.interceptors.response.use(
   (response) => {
-    // Log response in development
+    // Logga la risposta in sviluppo
     if (import.meta.env.DEV) {
       console.log('✅ API Response:', {
         url: response.config.url,
@@ -68,10 +68,10 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    // Parse error
+    // Analizza l'errore
     const parsedError = parseError(error);
 
-    // Log error in development
+    // Logga l'errore in sviluppo
     if (import.meta.env.DEV) {
       console.error('❌ API Error:', {
         url: error.config?.url,

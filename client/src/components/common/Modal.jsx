@@ -3,6 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { closeModal, selectModal } from '../../store/slices/uiSlice';
 import clsx from 'clsx';
 
+/**
+ * Componente Modal riutilizzabile
+ *
+ * @param {Object} props - Proprietà del componente
+ * @param {boolean} props.isOpen - Se il modale è aperto (controllo esterno)
+ * @param {Function} props.onClose - Funzione chiamata alla chiusura (controllo esterno)
+ * @param {string} props.title - Titolo del modale
+ * @param {React.ReactNode} props.children - Contenuto del modale
+ * @param {string} props.size - Dimensione del modale (sm, md, lg, xl, full)
+ * @param {boolean} props.showCloseButton - Se mostrare il pulsante di chiusura
+ */
 const Modal = ({
   isOpen: controlledIsOpen,
   onClose: controlledOnClose,
@@ -14,11 +25,11 @@ const Modal = ({
   const dispatch = useDispatch();
   const reduxModal = useSelector(selectModal);
 
-  // Use controlled or Redux state
+  // Usa lo stato controllato o lo stato Redux
   const isOpen = controlledIsOpen !== undefined ? controlledIsOpen : reduxModal.isOpen;
   const handleClose = controlledOnClose || (() => dispatch(closeModal()));
 
-  // Close on escape key
+  // Chiudi con il tasto Escape
   useEffect(() => {
     const handleEscape = (e) => {
       if (e.key === 'Escape' && isOpen) {
@@ -30,7 +41,7 @@ const Modal = ({
     return () => document.removeEventListener('keydown', handleEscape);
   }, [isOpen, handleClose]);
 
-  // Prevent body scroll when modal is open
+  // Previeni lo scroll del body quando il modale è aperto
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -45,6 +56,7 @@ const Modal = ({
 
   if (!isOpen) return null;
 
+  // Stili per diverse dimensioni
   const sizeStyles = {
     sm: 'max-w-md',
     md: 'max-w-lg',
@@ -55,13 +67,13 @@ const Modal = ({
 
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
-      {/* Backdrop */}
+      {/* Sfondo oscurato */}
       <div
         className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
         onClick={handleClose}
       ></div>
 
-      {/* Modal */}
+      {/* Modale */}
       <div className="flex min-h-full items-center justify-center p-4">
         <div
           className={clsx(
@@ -70,7 +82,7 @@ const Modal = ({
           )}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Header */}
+          {/* Intestazione */}
           {(title || showCloseButton) && (
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-dark-700">
               {title && (
@@ -101,7 +113,7 @@ const Modal = ({
             </div>
           )}
 
-          {/* Content */}
+          {/* Contenuto */}
           <div className="px-6 py-4">
             {children}
           </div>

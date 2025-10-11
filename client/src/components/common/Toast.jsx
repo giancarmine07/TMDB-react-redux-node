@@ -3,10 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { hideToast, selectToast } from '../../store/slices/uiSlice';
 import clsx from 'clsx';
 
+/**
+ * Componente Toast per notifiche temporanee
+ * Mostra messaggi di successo, errore, warning o info che scompaiono automaticamente
+ */
 const Toast = () => {
   const dispatch = useDispatch();
   const toast = useSelector(selectToast);
 
+  // Nascondi automaticamente il toast dopo la durata specificata
   useEffect(() => {
     if (toast.show) {
       const timer = setTimeout(() => {
@@ -19,6 +24,7 @@ const Toast = () => {
 
   if (!toast.show) return null;
 
+  // Stili per i diversi tipi di toast
   const typeStyles = {
     success: 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800 text-green-800 dark:text-green-200',
     error: 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800 text-red-800 dark:text-red-200',
@@ -26,6 +32,7 @@ const Toast = () => {
     info: 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800 text-blue-800 dark:text-blue-200',
   };
 
+  // Icone per i diversi tipi di toast
   const icons = {
     success: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -57,12 +64,17 @@ const Toast = () => {
           typeStyles[toast.type]
         )}
       >
+        {/* Icona del tipo di toast */}
         <div className="flex-shrink-0">
           {icons[toast.type]}
         </div>
+
+        {/* Messaggio */}
         <p className="flex-1 text-sm font-medium">
           {toast.message}
         </p>
+
+        {/* Pulsante chiudi */}
         <button
           onClick={() => dispatch(hideToast())}
           className="flex-shrink-0 hover:opacity-70 transition-opacity"
