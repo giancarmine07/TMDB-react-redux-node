@@ -1,19 +1,19 @@
 /**
- * UI Slice
- * Redux slice for UI state (theme, modals, toasts, sidebar)
+ * Slice UI
+ * Slice Redux per lo stato dell'interfaccia utente (tema, modali, toast, sidebar)
  */
 
 import { createSlice } from '@reduxjs/toolkit';
 import { STORAGE_KEYS, THEMES } from '../../constants';
 
-// Get initial theme from localStorage or system preference
+// Ottieni il tema iniziale dal localStorage o dalle preferenze di sistema
 const getInitialTheme = () => {
   const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME);
   if (savedTheme) {
     return savedTheme;
   }
 
-  // Check system preference
+  // Controlla le preferenze di sistema
   if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     return THEMES.DARK;
   }
@@ -21,7 +21,7 @@ const getInitialTheme = () => {
   return THEMES.LIGHT;
 };
 
-// Initial state
+// Stato iniziale
 const initialState = {
   theme: getInitialTheme(),
   sidebarOpen: false,
@@ -48,12 +48,12 @@ const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    // Theme
+    // Tema
     toggleTheme: (state) => {
       state.theme = state.theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
       localStorage.setItem(STORAGE_KEYS.THEME, state.theme);
 
-      // Apply theme to document
+      // Applica il tema al documento
       if (state.theme === THEMES.DARK) {
         document.documentElement.classList.add('dark');
       } else {
@@ -64,7 +64,7 @@ const uiSlice = createSlice({
       state.theme = action.payload;
       localStorage.setItem(STORAGE_KEYS.THEME, action.payload);
 
-      // Apply theme to document
+      // Applica il tema al documento
       if (action.payload === THEMES.DARK) {
         document.documentElement.classList.add('dark');
       } else {
@@ -83,7 +83,7 @@ const uiSlice = createSlice({
       state.sidebarOpen = false;
     },
 
-    // Modal
+    // Modale
     openModal: (state, action) => {
       state.modal = {
         isOpen: true,
@@ -125,7 +125,7 @@ const uiSlice = createSlice({
       };
     },
 
-    // Global loading
+    // Caricamento globale
     setGlobalLoading: (state, action) => {
       state.loading.global = true;
       state.loading.message = action.payload || '';
@@ -153,7 +153,7 @@ export const {
   clearGlobalLoading,
 } = uiSlice.actions;
 
-// Selectors
+// Selettori
 export const selectUI = (state) => state.ui;
 export const selectTheme = (state) => state.ui.theme;
 export const selectIsDarkMode = (state) => state.ui.theme === THEMES.DARK;

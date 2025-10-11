@@ -1,25 +1,25 @@
 /**
- * Favorites Slice
- * Redux slice for user's favorite movies
+ * Slice Preferiti
+ * Slice Redux per i film preferiti dell'utente
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as favoritesService from '../../services/favoritesService';
 import { createErrorState, clearErrorState } from '../../utils/errors/errorHandler';
 
-// Initial state
+// Stato iniziale
 const initialState = {
   items: [],
   loading: false,
   error: null,
   addingFavorite: false,
-  removingFavorite: null, // movieId being removed
+  removingFavorite: null, // ID del film in rimozione
   totalCount: 0,
   page: 1,
   totalPages: 0,
 };
 
-// Async thunks
+// Thunk asincroni
 export const fetchFavorites = createAsyncThunk(
   'favorites/fetchFavorites',
   async ({ page = 1, limit = 20 } = {}, { rejectWithValue }) => {
@@ -73,10 +73,10 @@ const favoritesSlice = createSlice({
   name: 'favorites',
   initialState,
   reducers: {
-    // Optimistic add
+    // Aggiunta ottimistica
     optimisticAddFavorite: (state, action) => {
       const movie = action.payload;
-      // Check if not already in favorites
+      // Controlla se non è già nei preferiti
       const exists = state.items.find((item) => item.movie_id === movie.id);
       if (!exists) {
         state.items.unshift({

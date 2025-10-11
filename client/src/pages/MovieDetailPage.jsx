@@ -19,12 +19,14 @@ const MovieDetailPage = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const isFavorite = useSelector(selectIsFavorite(parseInt(id)));
 
+  // Carica i dettagli del film quando l'ID cambia
   useEffect(() => {
     if (id) {
       dispatch(fetchMovieDetails(parseInt(id)));
     }
   }, [dispatch, id]);
 
+  // Gestisce l'aggiunta/rimozione dai preferiti
   const handleFavoriteToggle = () => {
     if (!isAuthenticated) {
       dispatch(showToast({ message: 'Please login to add favorites', type: 'warning' }));
@@ -64,7 +66,7 @@ const MovieDetailPage = () => {
 
   return (
     <div>
-      {/* Backdrop */}
+      {/* Immagine di sfondo */}
       {backdropUrl && (
         <div className="relative h-96 w-full">
           <img
@@ -76,10 +78,10 @@ const MovieDetailPage = () => {
         </div>
       )}
 
-      {/* Content */}
+      {/* Contenuto */}
       <div className="container-custom py-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Poster */}
+          {/* Locandina */}
           <div className="md:col-span-1">
             {posterUrl && (
               <Card padding="none" className="overflow-hidden">
@@ -88,7 +90,7 @@ const MovieDetailPage = () => {
             )}
           </div>
 
-          {/* Details */}
+          {/* Dettagli */}
           <div className="md:col-span-2">
             <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">{movie.title}</h1>
 

@@ -1,6 +1,6 @@
 /**
- * Favorites Controller
- * Handles favorite movie operations (add, remove, get favorites)
+ * Controller Preferiti
+ * Gestisce le operazioni sui film preferiti (aggiungi, rimuovi, ottieni preferiti)
  */
 
 const favoriteModel = require('../models/favoriteModel');
@@ -12,9 +12,9 @@ const {
 } = require('../utils/errors/AppError');
 
 /**
- * Get all favorites for authenticated user
+ * Ottiene tutti i preferiti per l'utente autenticato
  * @route GET /api/favorites
- * @access Protected
+ * @access Protetto
  */
 const getFavorites = catchAsync(async (req, res) => {
   const userId = req.user.id;
@@ -57,7 +57,7 @@ const getFavorites = catchAsync(async (req, res) => {
 });
 
 /**
- * Add movie to favorites
+ * Aggiunge un film ai preferiti
  * @route POST /api/favorites
  * @access Protected
  */

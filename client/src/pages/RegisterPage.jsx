@@ -23,6 +23,7 @@ const RegisterPage = () => {
   const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
+    // Cancella gli errori quando il componente viene smontato
     return () => {
       dispatch(clearError());
     };

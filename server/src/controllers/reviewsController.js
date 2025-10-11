@@ -1,6 +1,6 @@
 /**
- * Reviews Controller
- * Handles review operations (create, read, update, delete)
+ * Controller Recensioni
+ * Gestisce le operazioni sulle recensioni (creazione, lettura, aggiornamento, eliminazione)
  */
 
 const reviewModel = require('../models/reviewModel');
@@ -13,9 +13,9 @@ const {
 } = require('../utils/errors/AppError');
 
 /**
- * Get all reviews by authenticated user
+ * Ottiene tutte le recensioni dell'utente autenticato
  * @route GET /api/reviews/user
- * @access Protected
+ * @access Protetto
  */
 const getUserReviews = catchAsync(async (req, res) => {
   const userId = req.user.id;
@@ -58,9 +58,9 @@ const getUserReviews = catchAsync(async (req, res) => {
 });
 
 /**
- * Get all reviews for a movie
+ * Ottiene tutte le recensioni per un film
  * @route GET /api/reviews/movie/:movieId
- * @access Public
+ * @access Pubblico
  */
 const getMovieReviews = catchAsync(async (req, res) => {
   const movieId = parseInt(req.params.movieId);

@@ -1,6 +1,6 @@
 /**
- * Movies Slice
- * Redux slice for movies data from TMDB API
+ * Slice Film
+ * Slice Redux per i dati dei film dall'API TMDB
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
@@ -8,7 +8,7 @@ import * as moviesService from '../../services/moviesService';
 import { createErrorState, clearErrorState } from '../../utils/errors/errorHandler';
 import { CACHE_DURATION } from '../../constants';
 
-// Initial state
+// Stato iniziale
 const initialState = {
   popular: {
     results: [],
@@ -47,18 +47,18 @@ const initialState = {
   error: null,
 };
 
-// Helper function to check if cache is valid
+// Funzione helper per verificare se la cache è valida
 const isCacheValid = (lastFetch) => {
   if (!lastFetch) return false;
   return Date.now() - lastFetch < CACHE_DURATION.MOVIES;
 };
 
-// Async thunks
+// Thunk asincroni
 export const fetchPopularMovies = createAsyncThunk(
   'movies/fetchPopular',
   async (page = 1, { getState, rejectWithValue }) => {
     try {
-      // Check cache
+      // Controlla la cache
       const state = getState().movies.popular;
       if (page === state.page && isCacheValid(state.lastFetch)) {
         return { cached: true };

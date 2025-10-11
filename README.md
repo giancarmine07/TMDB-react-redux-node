@@ -290,7 +290,7 @@ Questo progetto è open source e disponibile sotto la [Licenza MIT](LICENSE).
 ### 👤 Autore
 
 **Giancarmine Santoro**
-- GitHub: [@giancarminesantoro](https://github.com/giancarminesantoro)
+- GitHub: [@giancarminesantoro](https://github.com/giancarmine07)
 
 ### 🙏 Ringraziamenti
 
@@ -590,7 +590,7 @@ This project is open source and available under the [MIT License](LICENSE).
 ### 👤 Author
 
 **Giancarmine Santoro**
-- GitHub: [@giancarminesantoro](https://github.com/giancarminesantoro)
+- GitHub: [@giancarminesantoro](https://github.com/giancarmine07)
 
 ### 🙏 Acknowledgments
 
