@@ -1,5 +1,19 @@
 import clsx from 'clsx';
 
+/**
+ * Componente Button riutilizzabile
+ *
+ * @param {Object} props - Proprietà del componente
+ * @param {React.ReactNode} props.children - Contenuto del bottone
+ * @param {string} props.variant - Variante dello stile (primary, secondary, danger, success, ghost, outline)
+ * @param {string} props.size - Dimensione del bottone (xs, sm, md, lg, xl)
+ * @param {boolean} props.disabled - Se il bottone è disabilitato
+ * @param {boolean} props.loading - Se il bottone è in stato di caricamento
+ * @param {boolean} props.fullWidth - Se il bottone deve occupare l'intera larghezza
+ * @param {string} props.className - Classi CSS aggiuntive
+ * @param {string} props.type - Tipo del bottone (button, submit, reset)
+ * @param {Function} props.onClick - Funzione chiamata al click
+ */
 const Button = ({
   children,
   variant = 'primary',
@@ -12,8 +26,10 @@ const Button = ({
   onClick,
   ...props
 }) => {
+  // Stili base comuni a tutte le varianti
   const baseStyles = 'font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 inline-flex items-center justify-center';
 
+  // Varianti di stile del bottone
   const variants = {
     primary: 'bg-primary-600 hover:bg-primary-700 text-white focus:ring-primary-500 dark:bg-primary-500 dark:hover:bg-primary-600',
     secondary: 'bg-gray-200 hover:bg-gray-300 text-gray-900 focus:ring-gray-500 dark:bg-dark-700 dark:hover:bg-dark-600 dark:text-white',
@@ -23,6 +39,7 @@ const Button = ({
     outline: 'bg-transparent border-2 border-primary-600 text-primary-600 hover:bg-primary-50 dark:border-primary-500 dark:text-primary-400 dark:hover:bg-primary-900/20',
   };
 
+  // Dimensioni del bottone
   const sizes = {
     xs: 'px-2 py-1 text-xs',
     sm: 'px-3 py-1.5 text-sm',
@@ -46,6 +63,7 @@ const Button = ({
       onClick={onClick}
       {...props}
     >
+      {/* Spinner di caricamento */}
       {loading && (
         <svg
           className="animate-spin -ml-1 mr-2 h-4 w-4"

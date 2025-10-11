@@ -1,5 +1,24 @@
 import clsx from 'clsx';
 
+/**
+ * Componente Input riutilizzabile
+ *
+ * @param {Object} props - Proprietà del componente
+ * @param {string} props.label - Etichetta del campo input
+ * @param {string} props.name - Nome del campo
+ * @param {string} props.type - Tipo di input (text, email, password, etc.)
+ * @param {string} props.value - Valore del campo
+ * @param {Function} props.onChange - Funzione chiamata al cambio del valore
+ * @param {Function} props.onBlur - Funzione chiamata alla perdita del focus
+ * @param {string} props.placeholder - Testo placeholder
+ * @param {string} props.error - Messaggio di errore
+ * @param {string} props.helperText - Testo di aiuto
+ * @param {boolean} props.required - Se il campo è obbligatorio
+ * @param {boolean} props.disabled - Se il campo è disabilitato
+ * @param {string} props.className - Classi CSS aggiuntive
+ * @param {React.ReactNode} props.icon - Icona da visualizzare
+ * @param {string} props.iconPosition - Posizione dell'icona (left, right)
+ */
 const Input = ({
   label,
   name,
@@ -19,6 +38,7 @@ const Input = ({
 }) => {
   return (
     <div className="w-full">
+      {/* Etichetta del campo */}
       {label && (
         <label
           htmlFor={name}
@@ -30,12 +50,14 @@ const Input = ({
       )}
 
       <div className="relative">
+        {/* Icona a sinistra */}
         {icon && iconPosition === 'left' && (
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
             {icon}
           </div>
         )}
 
+        {/* Campo input */}
         <input
           id={name}
           name={name}
@@ -60,6 +82,7 @@ const Input = ({
           {...props}
         />
 
+        {/* Icona a destra */}
         {icon && iconPosition === 'right' && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
             {icon}
@@ -67,12 +90,14 @@ const Input = ({
         )}
       </div>
 
+      {/* Messaggio di errore */}
       {error && (
         <p className="mt-1 text-sm text-red-600 dark:text-red-400">
           {error}
         </p>
       )}
 
+      {/* Testo di aiuto */}
       {helperText && !error && (
         <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
           {helperText}

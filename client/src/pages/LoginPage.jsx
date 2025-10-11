@@ -21,11 +21,11 @@ const LoginPage = () => {
 
   const [formErrors, setFormErrors] = useState({});
 
-  // Get the page they were trying to access
+  // Ottieni la pagina a cui stavano cercando di accedere
   const from = location.state?.from?.pathname || '/';
 
   useEffect(() => {
-    // Clear errors when component unmounts
+    // Cancella gli errori quando il componente viene smontato
     return () => {
       dispatch(clearError());
     };

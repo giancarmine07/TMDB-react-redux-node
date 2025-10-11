@@ -1,15 +1,15 @@
 /**
- * Reviews Service
- * API calls for movie reviews operations
+ * Servizio Recensioni
+ * Chiamate API per le operazioni sulle recensioni dei film
  */
 
 import { get, post, put, del } from './api';
 import { API_ENDPOINTS } from '../constants';
 
 /**
- * Get user's reviews
- * @param {number} page - Page number
- * @param {number} limit - Items per page
+ * Ottiene le recensioni dell'utente
+ * @param {number} page - Numero di pagina
+ * @param {number} limit - Elementi per pagina
  * @returns {Promise}
  */
 export const getUserReviews = async (page = 1, limit = 20) => {
@@ -20,10 +20,10 @@ export const getUserReviews = async (page = 1, limit = 20) => {
 };
 
 /**
- * Get reviews for a movie
- * @param {number} movieId - Movie ID
- * @param {number} page - Page number
- * @param {number} limit - Items per page
+ * Ottiene le recensioni per un film
+ * @param {number} movieId - ID del film
+ * @param {number} page - Numero di pagina
+ * @param {number} limit - Elementi per pagina
  * @returns {Promise}
  */
 export const getMovieReviews = async (movieId, page = 1, limit = 20) => {
@@ -34,8 +34,8 @@ export const getMovieReviews = async (movieId, page = 1, limit = 20) => {
 };
 
 /**
- * Get review by ID
- * @param {number} reviewId - Review ID
+ * Ottiene una recensione per ID
+ * @param {number} reviewId - ID della recensione
  * @returns {Promise}
  */
 export const getReviewById = async (reviewId) => {
@@ -44,12 +44,12 @@ export const getReviewById = async (reviewId) => {
 };
 
 /**
- * Create new review
- * @param {Object} reviewData - Review data
- * @param {number} reviewData.movieId - Movie ID
- * @param {string} reviewData.movieTitle - Movie title
- * @param {number} reviewData.rating - Rating (1-5)
- * @param {string} reviewData.comment - Review comment
+ * Crea una nuova recensione
+ * @param {Object} reviewData - Dati della recensione
+ * @param {number} reviewData.movieId - ID del film
+ * @param {string} reviewData.movieTitle - Titolo del film
+ * @param {number} reviewData.rating - Valutazione (1-5)
+ * @param {string} reviewData.comment - Commento della recensione
  * @returns {Promise}
  */
 export const createReview = async ({ movieId, movieTitle, rating, comment }) => {
@@ -63,10 +63,10 @@ export const createReview = async ({ movieId, movieTitle, rating, comment }) => 
 };
 
 /**
- * Update review
- * @param {number} reviewId - Review ID
- * @param {number} rating - New rating
- * @param {string} comment - New comment
+ * Aggiorna una recensione
+ * @param {number} reviewId - ID della recensione
+ * @param {number} rating - Nuova valutazione
+ * @param {string} comment - Nuovo commento
  * @returns {Promise}
  */
 export const updateReview = async (reviewId, rating, comment) => {
@@ -78,8 +78,8 @@ export const updateReview = async (reviewId, rating, comment) => {
 };
 
 /**
- * Delete review
- * @param {number} reviewId - Review ID
+ * Elimina una recensione
+ * @param {number} reviewId - ID della recensione
  * @returns {Promise}
  */
 export const deleteReview = async (reviewId) => {

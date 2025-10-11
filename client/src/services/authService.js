@@ -1,15 +1,15 @@
 /**
- * Auth Service
- * API calls for authentication (register, login, get current user)
+ * Servizio Autenticazione
+ * Chiamate API per l'autenticazione (registrazione, login, ottenere utente corrente)
  */
 
 import { post, get } from './api';
 import { API_ENDPOINTS } from '../constants';
 
 /**
- * Register new user
- * @param {Object} credentials - User credentials
- * @param {string} credentials.username - Username
+ * Registra un nuovo utente
+ * @param {Object} credentials - Credenziali utente
+ * @param {string} credentials.username - Nome utente
  * @param {string} credentials.email - Email
  * @param {string} credentials.password - Password
  * @returns {Promise}
@@ -24,8 +24,8 @@ export const register = async ({ username, email, password }) => {
 };
 
 /**
- * Login user
- * @param {Object} credentials - User credentials
+ * Effettua il login dell'utente
+ * @param {Object} credentials - Credenziali utente
  * @param {string} credentials.email - Email
  * @param {string} credentials.password - Password
  * @returns {Promise}
@@ -39,7 +39,7 @@ export const login = async ({ email, password }) => {
 };
 
 /**
- * Get current authenticated user
+ * Ottiene l'utente autenticato corrente
  * @returns {Promise}
  */
 export const getCurrentUser = async () => {
@@ -48,8 +48,8 @@ export const getCurrentUser = async () => {
 };
 
 /**
- * Logout user (client-side)
- * Clears token and user data from localStorage
+ * Effettua il logout dell'utente (lato client)
+ * Rimuove il token e i dati utente dal localStorage
  */
 export const logout = () => {
   localStorage.removeItem('movies_explorer_token');

@@ -1,13 +1,13 @@
 /**
- * Reviews Slice
- * Redux slice for movie reviews
+ * Slice Recensioni
+ * Slice Redux per le recensioni dei film
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as reviewsService from '../../services/reviewsService';
 import { createErrorState, clearErrorState } from '../../utils/errors/errorHandler';
 
-// Initial state
+// Stato iniziale
 const initialState = {
   userReviews: [],
   movieReviews: {},
@@ -18,7 +18,7 @@ const initialState = {
   deletingReview: null,
 };
 
-// Async thunks
+// Thunk asincroni
 export const fetchUserReviews = createAsyncThunk(
   'reviews/fetchUserReviews',
   async ({ page = 1, limit = 20 } = {}, { rejectWithValue }) => {
@@ -98,7 +98,7 @@ const reviewsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Fetch user reviews
+      // Recupera recensioni utente
       .addCase(fetchUserReviews.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -111,7 +111,7 @@ const reviewsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Fetch movie reviews
+      // Recupera recensioni film
       .addCase(fetchMovieReviews.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -131,7 +131,7 @@ const reviewsSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Create review
+      // Crea recensione
       .addCase(createReview.pending, (state) => {
         state.submittingReview = true;
         state.error = null;
@@ -140,10 +140,10 @@ const reviewsSlice = createSlice({
         state.submittingReview = false;
         const review = action.payload.review;
 
-        // Add to user reviews
+        // Aggiungi alle recensioni utente
         state.userReviews.unshift(review);
 
-        // Add to movie reviews if loaded
+        // Aggiungi alle recensioni del film se caricate
         const movieId = review.movie_id;
         if (state.movieReviews[movieId]) {
           state.movieReviews[movieId].reviews.unshift(review);
@@ -154,7 +154,7 @@ const reviewsSlice = createSlice({
         state.submittingReview = false;
         state.error = action.payload;
       })
-      // Update review
+      // Aggiorna recensione
       .addCase(updateReview.pending, (state, action) => {
         state.updatingReview = action.meta.arg.reviewId;
         state.error = null;
@@ -163,13 +163,13 @@ const reviewsSlice = createSlice({
         state.updatingReview = null;
         const updatedReview = action.payload.review;
 
-        // Update in user reviews
+        // Aggiorna nelle recensioni utente
         const userIndex = state.userReviews.findIndex((r) => r.id === updatedReview.id);
         if (userIndex !== -1) {
           state.userReviews[userIndex] = updatedReview;
         }
 
-        // Update in movie reviews
+        // Aggiorna nelle recensioni del film
         const movieId = updatedReview.movie_id;
         if (state.movieReviews[movieId]) {
           const movieIndex = state.movieReviews[movieId].reviews.findIndex(
@@ -184,7 +184,7 @@ const reviewsSlice = createSlice({
         state.updatingReview = null;
         state.error = action.payload;
       })
-      // Delete review
+      // Elimina recensione
       .addCase(deleteReview.pending, (state, action) => {
         state.deletingReview = action.meta.arg;
         state.error = null;
@@ -193,11 +193,11 @@ const reviewsSlice = createSlice({
         state.deletingReview = null;
         const reviewId = action.payload;
 
-        // Find and remove from user reviews
+        // Trova e rimuovi dalle recensioni utente
         const userReview = state.userReviews.find((r) => r.id === reviewId);
         state.userReviews = state.userReviews.filter((r) => r.id !== reviewId);
 
-        // Remove from movie reviews if exists
+        // Rimuovi dalle recensioni del film se esistono
         if (userReview) {
           const movieId = userReview.movie_id;
           if (state.movieReviews[movieId]) {
@@ -220,7 +220,7 @@ const reviewsSlice = createSlice({
 
 export const { clearError, clearMovieReviews, clearAllReviews } = reviewsSlice.actions;
 
-// Selectors
+// Selettori
 export const selectReviews = (state) => state.reviews;
 export const selectUserReviews = (state) => state.reviews.userReviews;
 export const selectMovieReviews = (movieId) => (state) =>

@@ -1,15 +1,15 @@
 /**
- * Favorites Service
- * API calls for favorite movies operations
+ * Servizio Preferiti
+ * Chiamate API per le operazioni sui film preferiti
  */
 
 import { get, post, del } from './api';
 import { API_ENDPOINTS } from '../constants';
 
 /**
- * Get all favorites for authenticated user
- * @param {number} page - Page number
- * @param {number} limit - Items per page
+ * Ottiene tutti i preferiti per l'utente autenticato
+ * @param {number} page - Numero di pagina
+ * @param {number} limit - Elementi per pagina
  * @returns {Promise}
  */
 export const getFavorites = async (page = 1, limit = 20) => {
@@ -20,8 +20,8 @@ export const getFavorites = async (page = 1, limit = 20) => {
 };
 
 /**
- * Add movie to favorites
- * @param {Object} movieData - Movie data from TMDB
+ * Aggiunge un film ai preferiti
+ * @param {Object} movieData - Dati del film da TMDB
  * @returns {Promise}
  */
 export const addFavorite = async (movieData) => {
@@ -37,8 +37,8 @@ export const addFavorite = async (movieData) => {
 };
 
 /**
- * Remove movie from favorites
- * @param {number} movieId - Movie ID
+ * Rimuove un film dai preferiti
+ * @param {number} movieId - ID del film
  * @returns {Promise}
  */
 export const removeFavorite = async (movieId) => {
@@ -47,8 +47,8 @@ export const removeFavorite = async (movieId) => {
 };
 
 /**
- * Check if movie is in favorites
- * @param {number} movieId - Movie ID
+ * Controlla se un film è nei preferiti
+ * @param {number} movieId - ID del film
  * @returns {Promise}
  */
 export const checkFavorite = async (movieId) => {
@@ -57,8 +57,8 @@ export const checkFavorite = async (movieId) => {
 };
 
 /**
- * Get favorite by movie ID
- * @param {number} movieId - Movie ID
+ * Ottiene un preferito per ID del film
+ * @param {number} movieId - ID del film
  * @returns {Promise}
  */
 export const getFavoriteByMovieId = async (movieId) => {

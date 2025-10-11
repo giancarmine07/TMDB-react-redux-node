@@ -1,6 +1,6 @@
 /**
- * Auth Controller
- * Handles authentication requests (register, login, get current user)
+ * Controller Autenticazione
+ * Gestisce le richieste di autenticazione (registrazione, login, ottenere utente corrente)
  */
 
 const bcrypt = require('bcrypt');
@@ -15,22 +15,22 @@ const {
 } = require('../utils/errors/AppError');
 
 /**
- * Register new user
+ * Registra un nuovo utente
  * @route POST /api/auth/register
- * @access Public
+ * @access Pubblico
  */
 const register = catchAsync(async (req, res) => {
   const { username, email, password } = req.body;
 
-  // Validate input
+  // Valida l'input
   if (!username || !email || !password) {
     throw new BadRequestError('Username, email, and password are required');
   }
 
-  // Validate user data
+  // Valida i dati utente
   authService.validateUserData(username, email, password);
 
-  // Check if user already exists
+  // Controlla se l'utente esiste già
   const existingEmail = await userModel.findUserByEmail(email);
   if (existingEmail) {
     throw new ConflictError('Email already registered');
@@ -41,13 +41,13 @@ const register = catchAsync(async (req, res) => {
     throw new ConflictError('Username already taken');
   }
 
-  // Hash password
+  // Hash della password
   const passwordHash = await authService.hashPassword(password);
 
-  // Create user
+  // Crea l'utente
   const user = await userModel.createUser(username, email, passwordHash);
 
-  // Generate token
+  // Genera il token
   const token = generateToken(user);
 
   res.status(201).json({
@@ -66,34 +66,34 @@ const register = catchAsync(async (req, res) => {
 });
 
 /**
- * Login user
+ * Effettua il login dell'utente
  * @route POST /api/auth/login
- * @access Public
+ * @access Pubblico
  */
 const login = catchAsync(async (req, res) => {
   const { email, password } = req.body;
 
-  // Validate input
+  // Valida l'input
   if (!email || !password) {
     throw new BadRequestError('Email and password are required');
   }
 
-  // Validate login data
+  // Valida i dati di login
   authService.validateLoginData(email, password);
 
-  // Find user by email
+  // Trova l'utente per email
   const user = await userModel.findUserByEmail(email);
   if (!user) {
     throw new UnauthorizedError('Invalid email or password');
   }
 
-  // Compare password
+  // Confronta la password
   const isPasswordValid = await authService.comparePassword(password, user.password_hash);
   if (!isPasswordValid) {
     throw new UnauthorizedError('Invalid email or password');
   }
 
-  // Generate token
+  // Genera il token
   const token = generateToken(user);
 
   res.status(200).json({
@@ -111,9 +111,9 @@ const login = catchAsync(async (req, res) => {
 });
 
 /**
- * Get current authenticated user
+ * Ottiene l'utente autenticato corrente
  * @route GET /api/auth/me
- * @access Protected
+ * @access Protetto
  */
 const getCurrentUser = catchAsync(async (req, res) => {
   const userId = req.user.id;

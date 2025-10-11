@@ -1,14 +1,14 @@
 /**
- * Movies Service
- * API calls for movies from TMDB (via backend proxy)
+ * Servizio Film
+ * Chiamate API per i film da TMDB (tramite proxy backend)
  */
 
 import { get } from './api';
 import { API_ENDPOINTS } from '../constants';
 
 /**
- * Get popular movies
- * @param {number} page - Page number
+ * Ottiene i film popolari
+ * @param {number} page - Numero di pagina
  * @returns {Promise}
  */
 export const getPopularMovies = async (page = 1) => {
@@ -19,9 +19,9 @@ export const getPopularMovies = async (page = 1) => {
 };
 
 /**
- * Search movies by query
- * @param {string} query - Search query
- * @param {number} page - Page number
+ * Cerca film per query
+ * @param {string} query - Query di ricerca
+ * @param {number} page - Numero di pagina
  * @returns {Promise}
  */
 export const searchMovies = async (query, page = 1) => {
@@ -32,8 +32,8 @@ export const searchMovies = async (query, page = 1) => {
 };
 
 /**
- * Get movie details by ID
- * @param {number} movieId - Movie ID
+ * Ottiene i dettagli del film per ID
+ * @param {number} movieId - ID del film
  * @returns {Promise}
  */
 export const getMovieDetails = async (movieId) => {
@@ -42,8 +42,8 @@ export const getMovieDetails = async (movieId) => {
 };
 
 /**
- * Get trending movies
- * @param {string} timeWindow - 'day' or 'week'
+ * Ottiene i film di tendenza
+ * @param {string} timeWindow - 'day' o 'week'
  * @returns {Promise}
  */
 export const getTrendingMovies = async (timeWindow = 'week') => {
@@ -54,8 +54,8 @@ export const getTrendingMovies = async (timeWindow = 'week') => {
 };
 
 /**
- * Get top rated movies
- * @param {number} page - Page number
+ * Ottiene i film più votati
+ * @param {number} page - Numero di pagina
  * @returns {Promise}
  */
 export const getTopRatedMovies = async (page = 1) => {
@@ -66,8 +66,8 @@ export const getTopRatedMovies = async (page = 1) => {
 };
 
 /**
- * Get now playing movies
- * @param {number} page - Page number
+ * Ottiene i film ora al cinema
+ * @param {number} page - Numero di pagina
  * @returns {Promise}
  */
 export const getNowPlayingMovies = async (page = 1) => {
@@ -78,8 +78,8 @@ export const getNowPlayingMovies = async (page = 1) => {
 };
 
 /**
- * Get upcoming movies
- * @param {number} page - Page number
+ * Ottiene i film in uscita
+ * @param {number} page - Numero di pagina
  * @returns {Promise}
  */
 export const getUpcomingMovies = async (page = 1) => {
@@ -90,7 +90,7 @@ export const getUpcomingMovies = async (page = 1) => {
 };
 
 /**
- * Get movie genres
+ * Ottiene i generi dei film
  * @returns {Promise}
  */
 export const getGenres = async () => {
@@ -99,8 +99,8 @@ export const getGenres = async () => {
 };
 
 /**
- * Discover movies with filters
- * @param {Object} filters - Filter options
+ * Scopri film con filtri
+ * @param {Object} filters - Opzioni di filtro
  * @returns {Promise}
  */
 export const discoverMovies = async (filters = {}) => {

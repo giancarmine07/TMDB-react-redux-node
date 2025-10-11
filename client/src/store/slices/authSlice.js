@@ -1,6 +1,6 @@
 /**
- * Auth Slice
- * Redux slice for authentication state management
+ * Slice Autenticazione
+ * Slice Redux per la gestione dello stato di autenticazione
  */
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
@@ -8,7 +8,7 @@ import * as authService from '../../services/authService';
 import { STORAGE_KEYS } from '../../constants';
 import { createErrorState, clearErrorState } from '../../utils/errors/errorHandler';
 
-// Initial state
+// Stato iniziale
 const initialState = {
   user: JSON.parse(localStorage.getItem(STORAGE_KEYS.USER)) || null,
   token: localStorage.getItem(STORAGE_KEYS.TOKEN) || null,
@@ -17,7 +17,7 @@ const initialState = {
   error: null,
 };
 
-// Async thunks
+// Thunk asincroni
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, { rejectWithValue }) => {
@@ -81,7 +81,7 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // Register
+      // Registrazione
       .addCase(register.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -115,20 +115,20 @@ const authSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-      // Get current user
+      // Ottieni utente corrente
       .addCase(getCurrentUser.pending, (state) => {
         state.loading = true;
       })
       .addCase(getCurrentUser.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload.user;
-        // Update user in localStorage
+        // Aggiorna utente nel localStorage
         localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(action.payload.user));
       })
       .addCase(getCurrentUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
-        // Auto logout on auth error
+        // Logout automatico in caso di errore di autenticazione
         state.user = null;
         state.token = null;
         state.isAuthenticated = false;
@@ -140,7 +140,7 @@ const authSlice = createSlice({
 
 export const { setCredentials, logout, clearError } = authSlice.actions;
 
-// Selectors
+// Selettori
 export const selectAuth = (state) => state.auth;
 export const selectUser = (state) => state.auth.user;
 export const selectIsAuthenticated = (state) => state.auth.isAuthenticated;
