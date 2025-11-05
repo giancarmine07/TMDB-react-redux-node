@@ -6,7 +6,7 @@
 
 ## Versione Italiana
 
-Un'applicazione full-stack per l'esplorazione di film costruita con React, Redux, Node.js, Express e PostgreSQL. Questo progetto dimostra pratiche moderne di sviluppo web tra cui gestione dello stato, API RESTful, autenticazione e containerizzazione Docker.
+Un'applicazione full-stack per l'esplorazione di film costruita con React, Redux, Node.js, Express e PostgreSQL. Sono state implementate, tra le altre, le seguenti pratiche di sviluppo: gestione dello stato, API RESTful, autenticazione e containerizzazione Docker.
 
 ### 🚀 Funzionalità
 
